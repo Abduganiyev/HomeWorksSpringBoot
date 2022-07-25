@@ -2,6 +2,8 @@ package com.example.homeworksspringboot.controller;
 
 import com.example.homeworksspringboot.model.Student;
 import com.example.homeworksspringboot.repository.StudentRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/students")
+@Api(value = "language")
 public class StudentController {
 
     private final StudentRepository studentRepository;
@@ -18,6 +21,7 @@ public class StudentController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ApiOperation(value = "111")
     private Student save(@RequestBody Student student) {
         return studentRepository.save(student);
     }
