@@ -31,4 +31,9 @@ public class Student {
 
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
+
+    public Student(String fullName, String email) {
+        this.fullName = fullName;
+        this.email = email;
+    }
 }

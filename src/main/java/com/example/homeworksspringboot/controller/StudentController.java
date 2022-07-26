@@ -2,6 +2,8 @@ package com.example.homeworksspringboot.controller;
 
 import com.example.homeworksspringboot.model.Student;
 import com.example.homeworksspringboot.repository.StudentRepository;
+import com.example.homeworksspringboot.rest.dto.StudentDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,17 +11,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/students")
+@RequiredArgsConstructor
 public class StudentController {
 
     private final StudentRepository studentRepository;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
-
     @PostMapping
-    private Student saveStudent(@RequestBody Student student) {
-        return studentRepository.save(student);
+    private Student saveStudent(@RequestBody StudentDto dto) {
+        return studentRepository.save(
+                new Student(
+                        dto.getFullName(),
+                        dto.getEmail())
+        );
     }
 
     @GetMapping("/{id}")
