@@ -37,12 +37,12 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    private String editStudent(@PathVariable(value = "id") Long studentId,@RequestBody Student student) {
+    private String editStudent(@PathVariable(value = "id") Long studentId,@RequestBody StudentDto dto) {
         boolean exists = studentRepository.existsById(studentId);
         if (exists) {
             Optional<Student> optionalStudent = studentRepository.findById(studentId);
-            optionalStudent.get().setFullName(student.getFullName());
-            optionalStudent.get().setEmail(student.getEmail());
+            optionalStudent.get().setFullName(dto.getFullName());
+            optionalStudent.get().setEmail(dto.getEmail());
             Student student1 = studentRepository.save(optionalStudent.get());
             return "Successfully edited";
         }
